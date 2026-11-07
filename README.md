@@ -1,2 +1,3 @@
 # borrowbuy
-fuck development
+always focus on your goals 
+make parents feel proud 
