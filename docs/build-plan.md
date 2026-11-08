@@ -2,14 +2,14 @@
 
 ## Goal and scope
 
-Help verified students discover and borrow useful campus items safely. A narrow MVP is more achievable than the full synopsis. Proposed phases below are **not implemented**. Agree on these decisions together before coding and update this document when the contract changes.
+Help users discover and borrow useful items in a campus-oriented prototype. Allow sign-up with any email address; no college-domain restriction or verified student status is required. A narrow MVP is more achievable than the full synopsis. Proposed phases below are **not implemented**. Agree on these decisions together before coding and update this document when the contract changes.
 
 ## Part 1 — Design together
 
 - Write user stories and sketch mobile-friendly screens: sign-in, browse/search, listing detail, create listing, incoming/outgoing requests and profile.
-- Agree on a simple data model: User (verified college identity), Listing (owner, title, description, category, price/deposit terms, availability), BorrowRequest (listing, borrower, status and dates), and eventually Review/condition evidence.
+- Agree on a simple data model: User (account with an email address), Listing (owner, title, description, category, price/deposit terms, availability), BorrowRequest (listing, borrower, status and dates), and eventually Review/condition evidence.
 - Decide whether the MVP has free borrowing only or charges/deposits. Display agreed terms clearly; do not implement real payments until the team has an explicit design and safeguards.
-- Decide how campus identities will be verified. A verified `@vit.edu` email is the proposed first step; domain ownership alone does not prove student status or prevent multiple institutional accounts per student. A true one-account-per-college-ID rule needs an authoritative, privacy-conscious verification mechanism and college approval. Do not promise it before that exists.
+- Allow any email domain for prototype accounts. This does not establish campus membership or enforce one account per person. A future college-ID verification mechanism would need an authoritative, privacy-conscious process and college approval; it is not part of this prototype.
 
 ## Part 2 — Foundation
 
@@ -19,7 +19,7 @@ Help verified students discover and borrow useful campus items safely. A narrow 
 
 ## Part 3 — Authentication and listings
 
-- Backend: implement an agreed server-verified identity provider or email verification, restrict access to verified allowed-domain users, and enforce owner-only edits. Implement create, browse, detail and edit for listings. Validate all input server-side and prevent clients from selecting another owner.
+- Backend: implement authentication that accepts any email domain and enforce owner-only edits on the server. Email verification, if implemented, only verifies access to an email address, not student status. Implement create, browse, detail and edit for listings. Validate all input server-side and prevent clients from selecting another owner.
 - Frontend: build login, browse/search, listing details and create/edit forms; handle loading, empty, error and unauthorized states. Use mock data only until the API is ready.
 - Joint: connect frontend to API, test two accounts and unauthorized actions. Keep listings and user data minimal; never expose sensitive identifiers publicly.
 
@@ -40,10 +40,10 @@ All paths are under `/api`; JSON responses and a consistent error format should 
 | Method and path | Purpose | Authorization |
 | --- | --- | --- |
 | `GET /health` | Service health | Public, no sensitive details |
-| `GET /listings` and `GET /listings/:id` | Search and view | Verified user |
-| `POST /listings` | Create listing | Verified user; server sets owner |
+| `GET /listings` and `GET /listings/:id` | Search and view | Authenticated user |
+| `POST /listings` | Create listing | Authenticated user; server sets owner |
 | `PATCH /listings/:id` | Edit listing | Owner only |
-| `POST /listings/:id/requests` | Request dates | Verified user, not owner |
+| `POST /listings/:id/requests` | Request dates | Authenticated user, not owner |
 | `GET /requests` | Own incoming/outgoing requests | Parties only |
 | `POST /requests/:id/accept`, `/decline`, `/return` | Transition request | Owner for accept/decline; return policy TBD |
 

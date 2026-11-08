@@ -1,0 +1,9 @@
+1)security - no external hacking , no price change
+2)trustworthy review-  1) only 1 college id for the buy and borrow system [ among college students only
+	2)if not returned on time( 1 day delay - not much penalty)
+	3)if  not returned on time(alot of days , no phone call answer) - owner can give bad review , also ask for some extra money if damaged product returned
+	4)major bad reviews can lead to suspension of account.
+	5)before/after condition photos ( 2 side request enable) - date and time mandatory + live photo as an option
+	6)profile must show reviews + condition of products returned + delay while giving returning the product ( based on these we will give a return / issue score for the particular profile)
+7)only one account allowed - through college id - so multiple profiles and accounts not allowed hence less chances of cheating with owner
+3)
